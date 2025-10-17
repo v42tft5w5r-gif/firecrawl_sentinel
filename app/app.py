@@ -12,14 +12,19 @@ from pathlib import Path
 utils_path = Path(__file__).parent.parent / "utils"
 sys.path.append(str(utils_path))
 
-from firecrawl_utils import (
-    fetch_ticker_list, 
-    fetch_alpha, 
-    fetch_fmp, 
-    fetch_marketaux_sentiment,
-    calculate_resistance,
-    compute_score
-)
+try:
+    from firecrawl_utils import (
+        fetch_ticker_list, 
+        fetch_alpha, 
+        fetch_fmp, 
+        fetch_marketaux_sentiment,
+        calculate_resistance,
+        compute_score
+    )
+except ImportError as e:
+    st.error(f"Import error: {e}")
+    st.error("Make sure all files are uploaded correctly to your repository")
+    st.stop()
 
 # Page configuration
 st.set_page_config(

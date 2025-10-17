@@ -9,6 +9,19 @@ FRED_KEY = os.getenv("FRED_KEY")
 SENTIMENT_KEY = os.getenv("SENTIMENT_KEY")
 TICKERS_CACHE = "tickers.csv"
 
+# Validate API keys are set
+def validate_api_keys():
+    missing_keys = []
+    if not ALPHA_KEY:
+        missing_keys.append("ALPHA_KEY")
+    if not FMP_KEY:
+        missing_keys.append("FMP_KEY")
+    if not FRED_KEY:
+        missing_keys.append("FRED_KEY")
+    if not SENTIMENT_KEY:
+        missing_keys.append("SENTIMENT_KEY")
+    return missing_keys
+
 def fetch_ticker_list(force_refresh=False):
     if os.path.exists(TICKERS_CACHE) and not force_refresh:
         df = pd.read_csv(TICKERS_CACHE)
